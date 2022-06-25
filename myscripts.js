@@ -41,6 +41,9 @@ function compareResults(storedAIMove, userChoice){
     else if(userChoice === 'SCISSORS' && storedAIMove === 'PAPER'){
         return win = playerWin;
     }
+    else if(userChoice === 'ROCK' && storedAIMove === 'PAPER'){
+        return win = AIWin;
+    }
     else{
         return win = AIWin;
     }   
@@ -53,16 +56,18 @@ function announceWinner(winner){
     else if(winner === 1){
         console.log('YOU WIN');
     }
-    else if(winner ===2){
+    else if(winner === 2){
         console.log('YOU LOSE');
     }
 }
 
 function game(){
-   let randomInt = getRandomInt();
-   let storedAIMove = getComputerMove(randomInt);  //storedAIMove used outside getComputerMove function
-   let userChoice = getUserMove();
-   let winner = compareResults(storedAIMove, userChoice);
-   announceWinner(winner);
+    for (let i = 0; i < 5; i++){
+        let randomInt = getRandomInt();
+        let storedAIMove = getComputerMove(randomInt);  //storedAIMove used outside getComputerMove function
+        let userChoice = getUserMove();
+        let winner = compareResults(storedAIMove, userChoice);
+        announceWinner(winner);
+    }
 }
 game();

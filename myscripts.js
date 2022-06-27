@@ -1,3 +1,6 @@
+const validChoices = ["rock", "paper", "scissors"];
+const winners = [];
+
 function getRandomInt() {
     return Math.floor(Math.random()* 3);
 }
@@ -13,52 +16,68 @@ function getComputerMove(randomInt){
     else if(randomInt===2){
         computerMove='SCISSORS'
     }
-    console.log(computerMove);
+    console.log("Computer Move: " + computerMove);
     return computerMove;
     
 }
 
+
 function getUserMove(){
     let userMove = prompt('Choose Rock, Paper, or Scissors');
+    while (userMove == null){
+        userMove = prompt('Choose Rock, Paper, or Scissors');
+    }
     userMove = userMove.toUpperCase();
-    console.log(userMove);
+    console.log("Player Move: " + userMove);
     return userMove;
 }
 
+
+
 function compareResults(storedAIMove, userChoice){
-    let tie = 0;
-    let playerWin = 1;
-    let AIWin = 2;
+   // let tie = 0;
+   // let playerWin = 1;
+   // let AIWin = 2;
     if (userChoice === storedAIMove){
-        return win = tie;
+        return "Tie";
     }
     else if(userChoice === 'ROCK' && storedAIMove === 'SCISSORS'){
-        return win = playerWin;
+        return "Player";
     }
     else if (userChoice === 'PAPER' && storedAIMove === 'ROCK'){
-        win = playerWin;
+       return "Player";
     }
     else if(userChoice === 'SCISSORS' && storedAIMove === 'PAPER'){
-        return win = playerWin;
+        return "Player";
     }
     else if(userChoice === 'ROCK' && storedAIMove === 'PAPER'){
-        return win = AIWin;
+        return "Computer";
     }
     else{
-        return win = AIWin;
+        return "Computer";
     }   
 }
 
 function announceWinner(winner){
-    if(winner === 0){
+    if(winner === "Tie"){
         console.log('TIE GAME!');
     }
-    else if(winner === 1){
+    else if(winner === "Player"){
         console.log('YOU WIN');
     }
-    else if(winner === 2){
+    else if(winner === "Computer"){
         console.log('YOU LOSE');
     }
+}
+
+function logWins(){
+    let playerWins = winners.filter((item) => item == "Player").length;
+    let computerWins = winners.filter((item) => item == "Computer").length;
+    let ties = winners.filter((item) => item == "Tie").length;
+    console.log('Results: ');
+    console.log('Player wins: ', playerWins);
+    console.log('Computer wins: ', computerWins);
+    console.log('Ties: ', ties);
 }
 
 function game(){
@@ -69,5 +88,7 @@ function game(){
         let winner = compareResults(storedAIMove, userChoice);
         announceWinner(winner);
     }
+    document.querySelector('button').textContent = "Click To Play New Game!"
+   // logWins();
 }
-game();
+// game();
